@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import '../blocs/stories_provider.dart';
+import './NewsListTile.dart';
 
 class NewsList extends StatelessWidget {
   @override
@@ -27,7 +28,9 @@ class NewsList extends StatelessWidget {
         return ListView.builder(
           itemCount: snapshot.data.length,
           itemBuilder: (context, index) {
-            return Text('${snapshot.data[index]}');
+            return NewsListTile(
+              itemId: snapshot.data[index],
+            );
           },
         );
       },
