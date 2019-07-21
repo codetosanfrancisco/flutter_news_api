@@ -33,14 +33,14 @@ class ItemModel {
 
   ItemModel.fromJson(Map<String, dynamic> parsedJSon) {
     id = parsedJSon['id'];
-    deleted = parsedJSon['deleted'];
+    deleted = parsedJSon['deleted'] ?? false;
     type = parsedJSon['type'];
     by = parsedJSon['by'];
     time = parsedJSon['time'];
-    text = parsedJSon['text'];
-    dead = parsedJSon['dead'];
+    text = parsedJSon['text'] ?? "";
+    dead = parsedJSon['dead'] ?? false;
     parent = parsedJSon['parent'];
-    kids = parsedJSon['kids'];
+    kids = parsedJSon['kids'] ?? [];
     url = parsedJSon['url'];
     score = parsedJSon['score'];
     title = parsedJSon['title'];

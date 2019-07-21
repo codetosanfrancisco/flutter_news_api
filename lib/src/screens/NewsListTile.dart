@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../blocs/stories_provider.dart';
+import '../models/ItemModel.dart';
 
 class NewsListTile extends StatelessWidget {
   final int itemId;
@@ -9,7 +10,6 @@ class NewsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = StoriesProvider.of(context);
-    // TODO: implement build
     bloc.fetchItem(itemId);
     return StreamBuilder(
       stream: bloc.items,
@@ -25,10 +25,26 @@ class NewsListTile extends StatelessWidget {
               return Text("Still loading the item $itemId");
             }
 
-            return Text(itemSnapshot.data.title);
+            return buildTile(itemSnapshot.data);
           },
         );
       },
+    );
+  }
+
+  Widget buildTile(ItemModel item) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(item.title),
+          subtitle: Text('${item.score} points'),
+          trailing: Column(
+              children: [Icon(Icons.comment), Text("${item.descendants}")]),
+        ),
+        Divider(
+          height: 8.0,
+        )
+      ],
     );
   }
 }
