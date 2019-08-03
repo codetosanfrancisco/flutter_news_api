@@ -35,7 +35,7 @@ class ItemModel {
     id = parsedJSon['id'];
     deleted = parsedJSon['deleted'] ?? false;
     type = parsedJSon['type'];
-    by = parsedJSon['by'];
+    by = parsedJSon['by'] ?? "";
     time = parsedJSon['time'];
     text = parsedJSon['text'] ?? "";
     dead = parsedJSon['dead'] ?? false;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import '../blocs/stories_provider.dart';
 import './NewsListTile.dart';
+import '../widgets/Refresh.dart';
 
 class NewsList extends StatelessWidget {
   @override
@@ -25,13 +26,15 @@ class NewsList extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
 
-        return ListView.builder(
-          itemCount: snapshot.data.length,
-          itemBuilder: (context, index) {
-            return NewsListTile(
-              itemId: snapshot.data[index],
-            );
-          },
+        return Refresh(
+          child: ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) {
+              return NewsListTile(
+                itemId: snapshot.data[index],
+              );
+            },
+          ),
         );
       },
     );

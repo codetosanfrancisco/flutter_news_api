@@ -15,7 +15,7 @@ class StoriesBloc {
 
   //Setter to the Blocs
   fetchTopIds() async {
-    final ids = await _repository.fetchTopIds();
+    final List ids = await _repository.fetchTopIds();
     _topIds.sink.add(ids);
   }
 
@@ -25,11 +25,16 @@ class StoriesBloc {
 
   get fetchItem => _itemsFetcher.sink.add;
 
+  Future<void> clearCache() {
+    return _repository.clearCache();
+  }
+
   _itemsTransformer() {
     return ScanStreamTransformer(
+        //ScanStreamTransformer is actually an accumulator function
         (Map<int, Future<ItemModel>> cache, int id, index) {
       cache[id] = _repository.fetchItem(id);
-      return cache;
+      return cache; //return means putting the returned things back to the stream
     }, <int, Future<ItemModel>>{});
   }
 
