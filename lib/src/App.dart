@@ -28,6 +28,10 @@ class App extends StatelessWidget {
         final itemId = int.parse(settings.name.replaceFirst('/', ''));
         commentsBloc.fetchItemWithComments(itemId);
 
+        final storiesBloc = StoriesProvider.of(context);
+
+        storiesBloc.fetchTopIds();
+
         return NewsDetails(itemId: itemId);
       });
     }

@@ -8,19 +8,21 @@ class CommentsBloc {
   final _commentsFetcher = PublishSubject<int>();
   final _commentsOutput = BehaviorSubject<Map<int, Future<ItemModel>>>();
 
-  //Streams
+  //Streams (Getter)
   Observable<Map<int, Future<ItemModel>>> get itemsWithComments =>
       _commentsOutput.stream;
 
-  //Sink
+  //Sink (Setter)
   Function(int) get fetchItemWithComments => _commentsFetcher.sink.add;
 
+  //Attaching Transformer
   CommentsBloc() {
     _commentsFetcher.stream
         .transform(_commentsTransformer())
         .pipe(_commentsOutput);
   }
 
+  //Transformer
   _commentsTransformer() {
     return ScanStreamTransformer<int, Map<int, Future<ItemModel>>>(
         (Map cache, int id, index) {
